@@ -1,63 +1,104 @@
 package com.example.smartpark.controller;
 
 import com.example.smartpark.dto.ParkingLotDTO;
-import com.example.smartpark.entity.ParkingLot;
-import com.example.smartpark.entity.Vehicle;
 import com.example.smartpark.dto.VehicleDTO;
-import com.example.smartpark.service.ParkingService;
+import com.example.smartpark.service.SmartParkService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
-
+/*
+ *   SMARTPARK CONTROLLER
+ */
 @RequestMapping("/smartparking")
 @RestController
 public class SmartParkingController {
 
-    ParkingService parkingService;
+    SmartParkService smartParkService;
 
-    public SmartParkingController(ParkingService parkingService) {
-        this.parkingService = parkingService;
+    public SmartParkingController(SmartParkService smartParkService) {
+        this.smartParkService = smartParkService;
     }
 
+    /*
+     *   REGISTER PARKING LOT
+     *   Method : POST
+     *
+     *   Accepts @RequestBody ParkingLotDTO
+     *
+     *   Returns ResponseEntity<ParkingLotDTO>
+     * */
     @PostMapping("/register/parkinglot")
-    public ResponseEntity<String> registerParkingLot(@RequestBody ParkingLot parkingLotDetails){
-        parkingService.registerParkingLot(parkingLotDetails);
-
-        return new ResponseEntity<>("Success", HttpStatus.OK);
+    public ResponseEntity<ParkingLotDTO> registerParkingLot(@RequestBody ParkingLotDTO parkingLotDetails){
+        return new ResponseEntity<>(smartParkService.registerParkingLot(parkingLotDetails), HttpStatus.CREATED);
     }
 
+    /*
+     *   REGISTER VEHICLE
+     *   Method : POST
+     *
+     *   Accepts @RequestBody VehicleDTO
+     *
+     *   Returns ResponseEntity<VehicleDTO>
+     * */
     @PostMapping("/register/vehicle")
-    public ResponseEntity<String> registerVehicle(@RequestBody Vehicle vehicleDetails){
-        parkingService.registerVehicle(vehicleDetails);
-
-        return new ResponseEntity<>("Success", HttpStatus.OK);
+    public ResponseEntity<VehicleDTO> registerVehicle(@RequestBody VehicleDTO vehicleDetails){
+        return new ResponseEntity<>(smartParkService.registerVehicle(vehicleDetails), HttpStatus.OK);
     }
 
-    @PutMapping("/checkin/vehicle/")
-    public ResponseEntity<List<VehicleDTO>> checkInVehicleP(@RequestParam("license-plate") String licensePlate,
+    /*
+     *   CHECK IN VEHICLE
+     *   Method : PUT
+     *
+     *   Accepts @RequestParam license-plate, @RequestParam parking-lot-id
+     *
+     *   Returns ResponseEntity<List<VehicleDTO>>
+     * */
+    @PutMapping("/checkin/vehicle")
+    public ResponseEntity<List<VehicleDTO>> checkInVehicle(@RequestParam("license-plate") String licensePlate,
                                                   @RequestParam("parking-lot-id") String parkingLotId){
-        return new ResponseEntity<>(parkingService.checkInVehicle(licensePlate,
+        return new ResponseEntity<>(smartParkService.checkInVehicle(licensePlate,
                 parkingLotId), HttpStatus.OK);
     }
 
-    @PutMapping("checkout/vehicle/")
-    public ResponseEntity<List<VehicleDTO>> checkoutVehicle(@RequestParam("license-plate") String licensePlate,
-                                                  @RequestParam("parking-lot-id") String parkingLotId){
-        return new ResponseEntity<>(parkingService.checkOutVehicle(licensePlate, parkingLotId), HttpStatus.OK);
+    /*
+     *   CHECK OUT VEHICLE
+     *   Method : PUT
+     *
+     *   Accepts @RequestParam license-plate
+     *
+     *   Returns ResponseEntity<List<VehicleDTO>>
+     * */
+    @PutMapping("checkout/vehicle")
+    public ResponseEntity<List<VehicleDTO>> checkoutVehicle(@RequestParam("license-plate") String licensePlate){
+        return new ResponseEntity<>(smartParkService.checkOutVehicle(licensePlate), HttpStatus.OK);
     }
 
-    @GetMapping("/view/parkinglot/{parkingLotId}")
-    public ResponseEntity<List<ParkingLotDTO>> viewParkingLotStatus(@PathVariable String parkingLotId){
-
-        return new ResponseEntity<>(parkingService.viewParkingStatus(parkingLotId), HttpStatus.OK);
+    /*
+     *   VIEW PARKING LOT STATUS
+     *   Method : GET
+     *
+     *   Accepts @RequestParam parking-lot-id
+     *
+     *   Returns ResponseEntity<List<ParkingLotDTO>>
+     * */
+    @GetMapping("/view/parkinglot")
+    public ResponseEntity<List<ParkingLotDTO>> viewParkingLotStatus(@RequestParam("parking-lot-id") String parkingLotId){
+        return new ResponseEntity<>(smartParkService.viewParkingStatus(parkingLotId), HttpStatus.OK);
     }
 
-    @GetMapping("/view/vehicles/{parkingLotId}")
-    public ResponseEntity<List<VehicleDTO>> viewAllVehiclesPerLot(@PathVariable String parkingLotId){
-        return new ResponseEntity<>(parkingService.viewAllVehiclePerLot(parkingLotId), HttpStatus.OK);
+    /*
+     *   VIEW VEHICLES IN A PARKING LOT
+     *   Method : GET
+     *
+     *   Accepts @RequestParam parking-lot-id
+     *
+     *   Returns ResponseEntity<List<VehicleDTO>>
+     * */
+    @GetMapping("/view/vehicles")
+    public ResponseEntity<List<VehicleDTO>> viewAllVehiclesPerLot(@RequestParam("parking-lot-id") String parkingLotId){
+        return new ResponseEntity<>(smartParkService.viewAllVehiclePerLot(parkingLotId), HttpStatus.OK);
     }
 }

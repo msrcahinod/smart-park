@@ -1,0 +1,576 @@
+{
+  "info": {
+    "_postman_id": "788bc00b-ca0c-4678-862c-8834c130a913",
+    "name": "SmartPark Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57581883",
+    "_collection_link": "https://go.postman.co/collection/57581883-788bc00b-ca0c-4678-862c-8834c130a913?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Functionality 1 (REGISTER PARKING LOT)",
+      "item": [
+        {
+          "name": "Correct vehicle JSON inputs",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"lotId\":\"LOT839\",\r\n    \"location\":\"Manila\",\r\n    \"capacity\":10,\r\n    \"occupiedSpaces\":0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/smartparking/register/parkinglot",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "register",
+                "parkinglot"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Exceeding lotId characters",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"lotId\":\"LOTAJHSDKJHIHUFJ97897289034708957098734895780932478095708934JKASDHASDHKJ\",\r\n    \"location\":\"Manila\",\r\n    \"capacity\":10,\r\n    \"occupiedSpaces\":0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/smartparking/register/parkinglot",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "register",
+                "parkinglot"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Functionality 2 (REGISTER VEHICLE)",
+      "item": [
+        {
+          "name": "Correct parking lot JSON inputs",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"licensePlate\":\"ZXC-789\",\r\n    \"type\":\"Truck\",\r\n    \"ownerName\":\"Patrick Star\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/smartparking/register/vehicle",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "register",
+                "vehicle"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Incorrect license plate format",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"licensePlate\":\"@#$ *^$\",\r\n    \"type\":\"Truck\",\r\n    \"ownerName\":\"Patrick Star\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/smartparking/register/vehicle",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "register",
+                "vehicle"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Incorrect vehicle type",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"licensePlate\":\"FTS-009\",\r\n    \"type\":\"Tesla\",\r\n    \"ownerName\":\"Manuel Geronimo\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/smartparking/register/vehicle",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "register",
+                "vehicle"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Incorrect ownerName format",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"licensePlate\":\"ZXC-789\",\r\n    \"type\":\"Car\",\r\n    \"ownerName\":\"Tyrion $%& 456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/smartparking/register/vehicle",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "register",
+                "vehicle"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Existing licensePlate",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"licensePlate\":\"WXY-5566\",\r\n    \"type\":\"Truck\",\r\n    \"ownerName\":\"Patrick Star\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/smartparking/register/vehicle",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "register",
+                "vehicle"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Funtionality 3 (CHECK IN VEHICLE)",
+      "item": [
+        {
+          "name": "Correct parameter",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/smartparking/checkin/vehicle?license-plate=ABC-1234&parking-lot-id=LOT1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "checkin",
+                "vehicle"
+              ],
+              "query": [
+                {
+                  "key": "license-plate",
+                  "value": "ABC-1234"
+                },
+                {
+                  "key": "parking-lot-id",
+                  "value": "LOT1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Unregistered license plate",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/smartparking/checkin/vehicle?license-plate=ACV-829&parking-lot-id=LOT1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "checkin",
+                "vehicle"
+              ],
+              "query": [
+                {
+                  "key": "license-plate",
+                  "value": "ACV-829"
+                },
+                {
+                  "key": "parking-lot-id",
+                  "value": "LOT1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Unregistered parking lot",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/smartparking/checkin/vehicle?license-plate=ABC-1234&parking-lot-id=LOT999",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "checkin",
+                "vehicle"
+              ],
+              "query": [
+                {
+                  "key": "license-plate",
+                  "value": "ABC-1234"
+                },
+                {
+                  "key": "parking-lot-id",
+                  "value": "LOT999"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Checking-in already parked vehicle to different parking lot",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/smartparking/checkin/vehicle?license-plate=XYZ-9876&parking-lot-id=LOT2",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "checkin",
+                "vehicle"
+              ],
+              "query": [
+                {
+                  "key": "license-plate",
+                  "value": "XYZ-9876"
+                },
+                {
+                  "key": "parking-lot-id",
+                  "value": "LOT2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Checking-in in fully occupied parking lot",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/smartparking/checkin/vehicle?license-plate=LHD-0758&parking-lot-id=LOT3",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "checkin",
+                "vehicle"
+              ],
+              "query": [
+                {
+                  "key": "license-plate",
+                  "value": "LHD-0758"
+                },
+                {
+                  "key": "parking-lot-id",
+                  "value": "LOT3"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Functionality 4 (CHECK OUT VEHICLE)",
+      "item": [
+        {
+          "name": "Correct parameter",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/smartparking/checkout/vehicle?license-plate=JKL-3456",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "checkout",
+                "vehicle"
+              ],
+              "query": [
+                {
+                  "key": "license-plate",
+                  "value": "JKL-3456"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Unregistered license plate",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/smartparking/checkout/vehicle?license-plate=MNB-8473",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "checkout",
+                "vehicle"
+              ],
+              "query": [
+                {
+                  "key": "license-plate",
+                  "value": "MNB-8473"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Functionality 5 (VIEW DETAILS OF A PARKING LOT)",
+      "item": [
+        {
+          "name": "Correct parameter",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/smartparking/view/parkinglot?parking-lot-id=LOT1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "view",
+                "parkinglot"
+              ],
+              "query": [
+                {
+                  "key": "parking-lot-id",
+                  "value": "LOT1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Unregistered parking lot",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/smartparking/view/parkinglot?parking-lot-id=LOT55",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "view",
+                "parkinglot"
+              ],
+              "query": [
+                {
+                  "key": "parking-lot-id",
+                  "value": "LOT55"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Functionality 6 (VIEW VEHICLES ON A PARKING LOT)",
+      "item": [
+        {
+          "name": "Correct parameter",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/smartparking/view/vehicles?parking-lot-id=LOT1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "view",
+                "vehicles"
+              ],
+              "query": [
+                {
+                  "key": "parking-lot-id",
+                  "value": "LOT1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registered parking lot with no parked vehicle",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/smartparking/view/vehicles?parking-lot-id=LOT5",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "view",
+                "vehicles"
+              ],
+              "query": [
+                {
+                  "key": "parking-lot-id",
+                  "value": "LOT5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Unregistered parking lot",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/smartparking/view/vehicles?parking-lot-id=LOT55",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "smartparking",
+                "view",
+                "vehicles"
+              ],
+              "query": [
+                {
+                  "key": "parking-lot-id",
+                  "value": "LOT55"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

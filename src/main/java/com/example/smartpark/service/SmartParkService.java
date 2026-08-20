@@ -1,24 +1,24 @@
 package com.example.smartpark.service;
 
 import com.example.smartpark.dto.ParkingLotDTO;
-import com.example.smartpark.entity.ParkingLot;
-import com.example.smartpark.entity.Vehicle;
 import com.example.smartpark.dto.VehicleDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
+/*
+ *   SMARTPARK SERVICE
+ */
 @Service
-public interface ParkingService {
+public interface SmartParkService {
 
-    void registerParkingLot(ParkingLot parkingLot);
+    ParkingLotDTO registerParkingLot(ParkingLotDTO parkingLot);
 
-    void registerVehicle(Vehicle vehicle);
+    VehicleDTO registerVehicle(VehicleDTO vehicle);
 
     List<VehicleDTO> checkInVehicle(String licensePlate, String lotID);
 
-    List<VehicleDTO> checkOutVehicle(String licensePlate, String lotID);
+    List<VehicleDTO> checkOutVehicle(String licensePlate);
 
     List<ParkingLotDTO> viewParkingStatus(String parkingLotId);
 

@@ -1,10 +1,11 @@
 package com.example.smartpark.dto;
 
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import java.time.LocalDateTime;
 
+/*
+ *   ERROR RESPONSE DTO
+ */
 @Getter
 public class ErrorResponseDTO {
 
