@@ -41,7 +41,27 @@ Technologies:
    - Nonregistered parking lot ID validation.
 
 
+## Prerequisites ##
 
+- JDK 17 or higher
+- Maven 4.1.0
+
+## Building and Running ##
+
+1. **Build the application**:
+   ```bash
+   ./mvnw clean package
+   ```
+
+2. **Run the application**:
+   ```bash
+   ./mvnw spring-boot:run
+   ```
+   
+   *The service will start on `http://localhost:8080`.*
+
+
+## Testing ##
 
 ## Input / Output JSON data object Structure ##
 
@@ -61,7 +81,7 @@ Parking lot JSON structure sample:
 }
 
 
-Input Validations:
+## Input Validations ##
 1. licensePlate - Letters, numbers and dash (-) are the only allowed characters.
 2. type - "Car", "Motorcycle" and "Truck" values only.
 3. licensePlate - Letters and spaces ( ) are the only allowed characters.
