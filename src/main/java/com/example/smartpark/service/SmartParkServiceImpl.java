@@ -55,7 +55,7 @@ public class SmartParkServiceImpl implements SmartParkService, SmartParkValidati
         registerParkingLot.setLotId(parkingLotDetails.getLotId());
         registerParkingLot.setLocation(parkingLotDetails.getLocation());
         registerParkingLot.setCapacity(parkingLotDetails.getCapacity());
-        registerParkingLot.setOccupiedSpaces(parkingLotDetails.getOccupiedSpaces());
+        registerParkingLot.setOccupiedSpaces(SmartParkConstants.ZERO);
 
         //Check if Parking Lot id is valid
         if (isValidParkingLotId(registerParkingLot.getLotId())){
@@ -111,6 +111,10 @@ public class SmartParkServiceImpl implements SmartParkService, SmartParkValidati
                 vehicleRepository.updateVehicleParkingLot(SmartParkConstants.UNASSIGNED_VEHICLE,
                         registerVehicle.getLicensePlate());
 
+                int unAssignedParkingCount = vehicleRepository.countAllByParkingLot_LotId(SmartParkConstants.UNASSIGNED_VEHICLE);
+
+                parkingLotRepository.updateParkingLotOccupiedSpaces(SmartParkConstants.UNASSIGNED_VEHICLE, unAssignedParkingCount);
+
             } else
                 //Error : Input format Incorrect.
                 throw new SmartParkException(SmartParkConstants.ERR_MSG_INCORRECT_FORMAT, HttpStatus.BAD_REQUEST);
@@ -149,8 +153,14 @@ public class SmartParkServiceImpl implements SmartParkService, SmartParkValidati
                     //Get updated vehicle count
                     int parkingLotOccupancyCount = vehicleRepository.countAllByParkingLot_LotId(parkingLotId);
 
-                    //Update parking Lot Occupancy Count - Main method function END
+                    //Update parking Lot Occupancy Count
                     parkingLotRepository.updateParkingLotOccupiedSpaces(parkingLotId, parkingLotOccupancyCount);
+
+                    //Get updated unassigned vehicle count
+                    int unAssignedParkingCount = vehicleRepository.countAllByParkingLot_LotId(SmartParkConstants.UNASSIGNED_VEHICLE);
+
+                    //Update unassigned Lot Occupancy Count - Main method function END
+                    parkingLotRepository.updateParkingLotOccupiedSpaces(SmartParkConstants.UNASSIGNED_VEHICLE, unAssignedParkingCount);
                 } else
                     //Error : Vehicle is already parked
                     throw new SmartParkException(SmartParkConstants.ERR_MSG_ALREADY_PARKED_VEHICLE, HttpStatus.BAD_REQUEST);
@@ -187,8 +197,14 @@ public class SmartParkServiceImpl implements SmartParkService, SmartParkValidati
                 //Get updated parking lot occupancy count;
                 int updatedParkingLotOccupancyCount = vehicleRepository.countAllByParkingLot_LotId(parkingLotId);
 
-                //Update parking Lot Occupancy Count - Main method function END
+                //Update parking Lot Occupancy Count
                 parkingLotRepository.updateParkingLotOccupiedSpaces(parkingLotId, updatedParkingLotOccupancyCount);
+
+                //Get updated unassigned vehicle count
+                int unAssignedParkingCount = vehicleRepository.countAllByParkingLot_LotId(SmartParkConstants.UNASSIGNED_VEHICLE);
+
+                //Update unassigned Lot Occupancy Count - Main method function END
+                parkingLotRepository.updateParkingLotOccupiedSpaces(SmartParkConstants.UNASSIGNED_VEHICLE, unAssignedParkingCount);
             } else
                 //Error : Vehicle is not parked yet
                 throw new SmartParkException(SmartParkConstants.ERR_MSG_VEHICLE_NOT_PARKED, HttpStatus.BAD_REQUEST);

@@ -10,6 +10,8 @@ public class SmartParkConstants {
 
     public static final String EMPTY_STRING = "";
 
+    public static final int ZERO = 0;
+
     /*VALID INPUT FORMAT*/
     public static final String LICENSE_REGEX = "^[a-zA-Z0-9-]+$";
 
