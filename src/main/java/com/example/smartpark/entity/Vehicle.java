@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+/*
+*   VEHICLE ENTITY
+*/
 @Entity
 @Getter
 @Setter

@@ -3,11 +3,13 @@ package com.example.smartpark.utils;
 import com.example.smartpark.entity.ParkingLot;
 import com.example.smartpark.entity.Vehicle;
 import com.example.smartpark.repository.ParkingLotRepository;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/*
+ *   MOCK DATA
+ */
 @Component
 public class MockData {
 
@@ -19,9 +21,10 @@ public class MockData {
 
     public void fillParkingLot(){
 
+        ParkingLot unassignedParkingLot = createLot(SmartParkConstants.UNASSIGNED_VEHICLE, "NONE", 1000, 0);
         ParkingLot lot1 = createLot("LOT1", "Downtown Garage", 50, 3);
         ParkingLot lot2 = createLot("LOT2", "Airport North Lot", 100, 2);
-        ParkingLot lot3 = createLot("LOT3", "Mall South Lot", 30, 2);
+        ParkingLot lot3 = createLot("LOT3", "Mall South Lot", 2, 2);
         ParkingLot lot4 = createLot("LOT4", "Central Station Plaza", 40, 3);
         ParkingLot lot5 = createLot("LOT5", "Harbor West Terminal", 25, 0);
 
@@ -39,7 +42,7 @@ public class MockData {
         addVehicle(lot4, "TUV-3344", "Motorcycle", "Ian Malcolm");
         addVehicle(lot4, "WXY-5566", "Motorcycle", "Julia Roberts");
 
-        parkingLotRepository.saveAll(List.of(lot1, lot2, lot3, lot4, lot5));
+        parkingLotRepository.saveAll(List.of(unassignedParkingLot, lot1, lot2, lot3, lot4, lot5));
     }
 
     private ParkingLot createLot(String id, String location, int capacity, int occupiedSpaces) {
