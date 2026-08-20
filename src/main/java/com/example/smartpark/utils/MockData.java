@@ -21,14 +21,16 @@ public class MockData {
 
     public void fillParkingLot(){
 
-        ParkingLot unassignedParkingLot = createLot(SmartParkConstants.UNASSIGNED_VEHICLE, "NONE", 1000, 0);
-        ParkingLot lot1 = createLot("LOT1", "Downtown Garage", 50, 3);
+        ParkingLot unassignedParkingLot = createLot(SmartParkConstants.UNASSIGNED_VEHICLE, "NONE", 1000, 2);
+        ParkingLot lot1 = createLot("LOT1", "Downtown Garage", 50, 2);
         ParkingLot lot2 = createLot("LOT2", "Airport North Lot", 100, 2);
         ParkingLot lot3 = createLot("LOT3", "Mall South Lot", 2, 2);
         ParkingLot lot4 = createLot("LOT4", "Central Station Plaza", 40, 3);
         ParkingLot lot5 = createLot("LOT5", "Harbor West Terminal", 25, 0);
 
-        addVehicle(lot1, "ABC-1234", "Car", "Alice Smith");
+        addVehicle(unassignedParkingLot, "ABC-1234", "Car", "Alice Smith");
+        addVehicle(unassignedParkingLot, "LHD-0758", "Car", "Josh Smith");
+
         addVehicle(lot1, "XYZ-9876", "Motorcycle", "Bob Jones");
         addVehicle(lot1, "LMN-4567", "Truck", "Charlie Brown");
 
